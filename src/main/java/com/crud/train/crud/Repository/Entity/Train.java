@@ -1,5 +1,7 @@
 package com.crud.train.crud.Repository.Entity;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +16,9 @@ import lombok.Data;
 @Data
 @Entity
 @Table(name = "TRAIN")
-public class Train {
+public class Train implements Serializable {
+  private static final long serialVersionUID = 1L;
+
   @TableGenerator(name = "id_generator", table = "ID_GEN", pkColumnName = "gen_name", valueColumnName = "gen_value",
   pkColumnValue="user_gen", initialValue=1000, allocationSize=10)
   @Id

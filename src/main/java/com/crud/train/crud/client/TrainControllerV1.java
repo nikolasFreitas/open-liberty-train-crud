@@ -3,6 +3,7 @@ package com.crud.train.crud.client;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.transaction.Transactional;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -22,6 +23,7 @@ public class TrainControllerV1 {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
+  @Transactional
   public Train createTrain(Train train) {    
     return trainDao.create(train);
   }
