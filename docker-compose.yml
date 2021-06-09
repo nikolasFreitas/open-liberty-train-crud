@@ -9,6 +9,7 @@ services:
       MYSQL_DATABASE: myDB
       MYSQL_USER: exampleUser
       MYSQL_PASSWORD: examplePassword
+      MYSQL_ROOT_PASSWORD: 123
     ports:
       - 3307:3306
     volumes:
