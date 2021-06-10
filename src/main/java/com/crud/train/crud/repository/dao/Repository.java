@@ -1,4 +1,4 @@
-package com.crud.train.crud.Repository.DAO;
+package com.crud.train.crud.repository.dao;
 
 /**
  * @License
@@ -28,6 +28,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.validation.Valid;
 
 
 
@@ -36,7 +37,7 @@ public abstract class Repository<T> {
     @PersistenceContext(name = "myDB")
     private EntityManager em;
 
-    public T create(final T obj) {
+    public T create(@Valid final T obj) {
         this.em.persist(obj);
         return obj;
     }

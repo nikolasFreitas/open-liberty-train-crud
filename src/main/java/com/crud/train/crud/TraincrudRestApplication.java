@@ -13,7 +13,6 @@ import javax.ws.rs.core.Application;
 @ApplicationPath("/data")
 
 @LoginConfig(authMethod = "MP-JWT", realmName = "jwt-jaspi")
-// @DeclareRoles({"protected"})
-
+@DeclareRoles({"protected"})
 public class TraincrudRestApplication extends Application {
 }

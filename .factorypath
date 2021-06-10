@@ -1,10 +1,4 @@
 <factorypath>
-    <factorypathentry kind="VARJAR" id="M2_REPO/org/projectlombok/lombok/1.18.20/lombok-1.18.20.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/mysql/mysql-connector-java/8.0.25/mysql-connector-java-8.0.25.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/api/com.ibm.websphere.appserver.api.connectionmanager/1.2.52/com.ibm.websphere.appserver.api.connectionmanager-1.2.52.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/spi/com.ibm.websphere.appserver.spi.classloading/1.4.52/com.ibm.websphere.appserver.spi.classloading-1.4.52.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/spi/com.ibm.websphere.appserver.spi.javaeedd/1.4.52/com.ibm.websphere.appserver.spi.javaeedd-1.4.52.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/servlet/javax.servlet-api/3.0.1/javax.servlet-api-3.0.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/api/com.ibm.websphere.appserver.api.transaction/1.1.52/com.ibm.websphere.appserver.api.transaction-1.1.52.jar" enabled="true" runInBatchMode="false"/>
@@ -12,13 +6,26 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/spi/com.ibm.websphere.appserver.spi.containerServices/4.0.52/com.ibm.websphere.appserver.spi.containerServices-4.0.52.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/annotation/javax.annotation-api/1.2/javax.annotation-api-1.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/el/javax.el-api/3.0.0/javax.el-api-3.0.0.jar" enabled="true" runInBatchMode="false"/>
-    <factorypathentry kind="VARJAR" id="M2_REPO/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/enterprise/cdi-api/1.2/cdi-api-1.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/inject/javax.inject/1/javax.inject-1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/spi/com.ibm.websphere.appserver.spi.anno/1.1.52/com.ibm.websphere.appserver.spi.anno-1.1.52.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/spi/com.ibm.websphere.appserver.spi.artifact/1.2.52/com.ibm.websphere.appserver.spi.artifact-1.2.52.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/resource/javax.resource-api/1.7/javax.resource-api-1.7.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/spi/com.ibm.websphere.appserver.spi.transaction/1.1.52/com.ibm.websphere.appserver.spi.transaction-1.1.52.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/api/com.ibm.websphere.appserver.api.endpoint/1.0.52/com.ibm.websphere.appserver.api.endpoint-1.0.52.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/api/com.ibm.websphere.appserver.api.persistence/1.0.52/com.ibm.websphere.appserver.api.persistence-1.0.52.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/javax/enterprise/concurrent/javax.enterprise.concurrent-api/1.0/javax.enterprise.concurrent-api-1.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/javax/transaction/jta/1.1/jta-1.1.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/api/com.ibm.websphere.appserver.api.connectionmanager/1.2.52/com.ibm.websphere.appserver.api.connectionmanager-1.2.52.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/spi/com.ibm.websphere.appserver.spi.classloading/1.4.52/com.ibm.websphere.appserver.spi.classloading-1.4.52.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/javax/ejb/javax.ejb-api/3.2/javax.ejb-api-3.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/javax/interceptor/javax.interceptor-api/1.2/javax.interceptor-api-1.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/api/com.ibm.websphere.appserver.api.ejbcontainer/1.0.52/com.ibm.websphere.appserver.api.ejbcontainer-1.0.52.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/api/com.ibm.websphere.appserver.api.basics/1.4.52/com.ibm.websphere.appserver.api.basics-1.4.52.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/ibm/websphere/appserver/spi/com.ibm.websphere.appserver.spi.application/1.1.52/com.ibm.websphere.appserver.spi.application-1.1.52.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/org/projectlombok/lombok/1.18.20/lombok-1.18.20.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/mysql/mysql-connector-java/8.0.25/mysql-connector-java-8.0.25.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/google/protobuf/protobuf-java/3.11.4/protobuf-java-3.11.4.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/javax/persistence/javax.persistence-api/2.2/javax.persistence-api-2.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/persistence/eclipselink/2.7.1/eclipselink-2.7.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/eclipse/persistence/javax.persistence/2.2.0/javax.persistence-2.2.0.jar" enabled="true" runInBatchMode="false"/>
