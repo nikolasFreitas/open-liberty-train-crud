@@ -16,8 +16,6 @@ package com.crud.train.crud.repository.dao;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import java.lang.reflect.ParameterizedType;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
@@ -33,7 +31,7 @@ import javax.validation.Valid;
 public abstract class Repository<T> {
 
     @PersistenceContext(name = "myDB")
-    private EntityManager em;
+    protected EntityManager em;
 
     private Class<T> genericClass;
 
