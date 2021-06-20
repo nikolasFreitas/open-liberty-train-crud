@@ -9,8 +9,8 @@ content-type: application/json
     "qtdWagons": 1234
 }
 
-## ----- 
+###
 
 ##GET TRAIN
 GET {{baseurl}}/data/v1/train/1 HTTP/1.1
-Content-Type: application/json
+
