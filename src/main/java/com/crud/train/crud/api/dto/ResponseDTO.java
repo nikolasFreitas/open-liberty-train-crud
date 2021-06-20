@@ -1,12 +1,16 @@
-package com.crud.train.crud.api;
+package com.crud.train.crud.api.dto;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.json.bind.annotation.JsonbNillable;
+
 import lombok.Data;
 
 @Data
-public class ResponseFormat {
+@JsonbNillable(value = true)
+public class ResponseDTO {
+
   private Object data = null;
   private List<String> errors =  new ArrayList<>();
 

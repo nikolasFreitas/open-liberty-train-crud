@@ -3,11 +3,9 @@ package com.crud.train.crud.api.controller;
 
 import java.util.Set;
 
-import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.validation.ConstraintViolation;
-import javax.validation.Valid;
 import javax.validation.ValidationException;
 import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
@@ -19,23 +17,22 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 
-import com.crud.train.crud.api.ResponseFormat;
 import com.crud.train.crud.api.dto.CreateTrainDto;
 import com.crud.train.crud.repository.Entity.Train;
-import com.crud.train.crud.repository.dao.TrainDAO;
+import com.crud.train.crud.services.TrainService;
+import com.crud.train.crud.util.ResponseUtil;
 
 
 @Path("/v1/train")
 public class TrainControllerV1 {
 
   @Inject
-  private TrainDAO trainDao;
+  private TrainService trainService;
 
   @Inject
-  private ResponseFormat responseFormatter;
+  private ResponseUtil responseUtil;
 
   @Inject
   private ValidatorFactory validatorFactory;
@@ -50,22 +47,15 @@ public class TrainControllerV1 {
       Set<ConstraintViolation<CreateTrainDto>> constraintViolations = validator.validate(trainDto);
 
       if (!constraintViolations.isEmpty()) {
-        constraintViolations.stream().forEach((outroConstraint) -> {
-          System.out.println(outroConstraint.getMessageTemplate());
-          responseFormatter.addError(outroConstraint.getMessageTemplate());
-        });
-        var response = Response.fromResponse(Response.status(Status.BAD_REQUEST).build()).entity(responseFormatter);
-
-        return response.build();
+        return responseUtil.formatBadrequest(constraintViolations);
       }
-      
+
       var train = new Train();
       train.setLocomotiveModel(trainDto.getLocomotiveModel());
       train.setQtdWagons(trainDto.getQtdWagons());
   
-      var persistedTrain = trainDao.create(train);
-      responseFormatter.setData(persistedTrain);
-      return Response.ok(responseFormatter).build();
+      var persistedTrain = trainService.create(train);
+      return responseUtil.formatCreate(persistedTrain);
 
     } catch (ValidationException e) {
       System.out.println(e.getMessage());
@@ -80,8 +70,8 @@ public class TrainControllerV1 {
   @Transactional
   public Response getTrain(@PathParam("id") Long userId) {
     try {
-      var train = trainDao.find(userId);
-      return Response.ok(train).build();
+      var train = trainService.getDao().find(userId);
+      return responseUtil.customFormat(Status.OK, train);
     } catch (Exception e) {
       System.out.println(e);
       return Response.status(Status.NOT_FOUND).build();
