@@ -16,8 +16,6 @@ package com.crud.train.crud.repository.dao;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
-import java.lang.reflect.ParameterizedType;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
@@ -30,12 +28,16 @@ import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 
-
-
 public abstract class Repository<T> {
 
     @PersistenceContext(name = "myDB")
-    private EntityManager em;
+    protected EntityManager em;
+
+    private Class<T> genericClass;
+
+    protected Repository(Class<T> genericClass) {
+        this.genericClass = genericClass;
+    }
 
     public T create(@Valid final T obj) {
         this.em.persist(obj);
@@ -44,8 +46,8 @@ public abstract class Repository<T> {
 
     public List<T> read() {
         final CriteriaBuilder builder = em.getCriteriaBuilder();
-        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
-        final Root<T> root = criteria.from(this.genericClass());
+        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass);
+        final Root<T> root = criteria.from(this.genericClass);
         criteria.select(root);
         return em.createQuery(criteria).getResultList();
     }
@@ -59,34 +61,34 @@ public abstract class Repository<T> {
     }
 
     public void deleteFull(Long id) {
-        T obj = em.find(this.genericClass(), id);
+        T obj = em.find(this.genericClass, id);
         this.em.remove(obj);
     }
 
     public T find(Long id) {
-        return em.find(this.genericClass(), id);
+        return em.find(this.genericClass, id);
     }
 
     public T find(String hash) {
         final CriteriaBuilder builder = em.getCriteriaBuilder();
-        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
-        Root<T> root = criteria.from(this.genericClass());
+        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass);
+        Root<T> root = criteria.from(this.genericClass);
         criteria.select(root).where(builder.equal(root.get("hash"), hash));
         return em.createQuery(criteria).getSingleResult();
     }
 
     public T find(String column, String value) {
         final CriteriaBuilder builder = em.getCriteriaBuilder();
-        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
-        Root<T> root = criteria.from(this.genericClass());
+        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass);
+        Root<T> root = criteria.from(this.genericClass);
         criteria.select(root).where(builder.equal(root.get(column), value));
         return em.createQuery(criteria).getSingleResult();
     }
 
     public T find(String column1, String value1, String column2, String value2) {
         final CriteriaBuilder builder = em.getCriteriaBuilder();
-        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
-        Root<T> root = criteria.from(this.genericClass());
+        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass);
+        Root<T> root = criteria.from(this.genericClass);
         criteria.select(root).where((builder.equal(root.get(column1), value1)),
                                    (builder.equal(root.get(column2), value2)));
         return em.createQuery(criteria).getSingleResult();
@@ -95,8 +97,8 @@ public abstract class Repository<T> {
 
     public T findUser(String value1, String value2) {
         final CriteriaBuilder builder = em.getCriteriaBuilder();
-        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass());
-        Root<T> root = criteria.from(this.genericClass());
+        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass);
+        Root<T> root = criteria.from(this.genericClass);
         criteria.select(root).where((builder.equal(root.get("value1"), value1)),
                                    (builder.equal(root.get("value2"), value2)));
         return em.createQuery(criteria).getSingleResult();
@@ -123,14 +125,5 @@ public abstract class Repository<T> {
             Encoder encoder = Base64.getUrlEncoder().withoutPadding();
             String hash = encoder.encodeToString(bytes);
         return hash;
-    }
-
-
-
-
-
-    @SuppressWarnings("unchecked")
-    private Class<T> genericClass() {
-        return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
     }
 }

@@ -1,4 +1,4 @@
-package com.crud.train.crud.dto;
+package com.crud.train.crud.api.dto;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
