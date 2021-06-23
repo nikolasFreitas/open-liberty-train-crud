@@ -60,7 +60,7 @@ public class TrainControllerV1 {
     } catch (ValidationException e) {
       System.out.println(e.getMessage());
     }
-    
+
     return Response.serverError().build();
   }
 
@@ -68,14 +68,13 @@ public class TrainControllerV1 {
   @Produces(MediaType.APPLICATION_JSON)
   @Path("/{id}")
   @Transactional
-  public Response getTrain(@PathParam("id") Long userId) {
+  public Response getTrain(@PathParam("id") Long trainId) {
     try {
-      var train = trainService.getDao().find(userId);
+      var train = trainService.getDao().find(trainId);
       return responseUtil.customFormat(Status.OK, train);
     } catch (Exception e) {
       System.out.println(e);
       return Response.status(Status.NOT_FOUND).build();
     }
-
   }
 }
