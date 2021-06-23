@@ -2,7 +2,6 @@ package com.crud.train.crud.util;
 
 import java.util.Set;
 
-import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.validation.ConstraintViolation;
 import javax.ws.rs.core.Response;
@@ -21,8 +20,7 @@ public class ResponseUtil {
     constraintViolations.stream().forEach((outroConstraint) -> {
       responseDto.addError(outroConstraint.getMessageTemplate());
     });
-    var response = Response
-                    .fromResponse(Response.status(Status.BAD_REQUEST).build())
+    var response = Response.status(Status.BAD_REQUEST)
                     .entity(responseDto)
                     .build();
     return response;
@@ -30,8 +28,7 @@ public class ResponseUtil {
 
   public <T> Response formatCreate(T responseDTO) {
     responseDto.setData(responseDTO);
-    var response = Response
-      .fromResponse(Response.status(Status.CREATED).build())
+    var response = Response.status(Status.CREATED)
       .entity(responseDto)
       .build();
 
@@ -40,8 +37,7 @@ public class ResponseUtil {
 
   public <T> Response customFormat(Status httpStatus, T responseDTO) {
     responseDto.setData(responseDTO);
-    var response = Response
-      .fromResponse(Response.status(httpStatus).build())
+    var response = Response.status(httpStatus)
       .entity(responseDto)
       .build();
 
