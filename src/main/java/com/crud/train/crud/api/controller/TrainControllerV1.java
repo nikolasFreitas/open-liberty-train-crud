@@ -1,14 +1,8 @@
 package com.crud.train.crud.api.controller;
 
 
-import java.util.Set;
-
 import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.validation.ConstraintViolation;
 import javax.validation.ValidationException;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -33,14 +27,10 @@ public class TrainControllerV1 {
 
   @Inject
   private ResponseUtil responseUtil;
-
-  @Inject
-  private ValidatorFactory validatorFactory;
   
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Transactional
   public Response createTrain(final CreateTrainDto trainDto) {
     try {
       Response errorResponse = responseUtil.validateRequest(trainDto);
@@ -66,7 +56,6 @@ public class TrainControllerV1 {
   @GET
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
-  @Transactional
   public Response getTrain(@PathParam("id") Long trainId) {
     try {
       var train = trainService.getDao().find(trainId);

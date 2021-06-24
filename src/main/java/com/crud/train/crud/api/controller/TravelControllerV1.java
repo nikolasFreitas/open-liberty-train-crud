@@ -4,7 +4,6 @@ import javax.inject.Inject;
 import javax.validation.ValidatorFactory;
 import javax.ws.rs.Path;
 
-import com.crud.train.crud.repository.Entity.Passanger;
 import com.crud.train.crud.services.PassangerService;
 import com.crud.train.crud.services.RouteService;
 import com.crud.train.crud.services.TrainService;

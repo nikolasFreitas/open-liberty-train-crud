@@ -2,7 +2,6 @@ package com.crud.train.crud.repository.Entity;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.CascadeType;

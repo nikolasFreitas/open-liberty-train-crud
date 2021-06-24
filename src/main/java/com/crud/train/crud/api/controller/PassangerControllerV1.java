@@ -1,12 +1,6 @@
 package com.crud.train.crud.api.controller;
 
-import java.util.Set;
-
 import javax.inject.Inject;
-import javax.transaction.Transactional;
-import javax.validation.ConstraintViolation;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -31,7 +25,6 @@ public class PassangerControllerV1 {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  @Transactional
   public Response create(CreatePassangerDTO passangerDTO) {
     Response errorResponse = responseUtil.validateRequest(passangerDTO);
 
