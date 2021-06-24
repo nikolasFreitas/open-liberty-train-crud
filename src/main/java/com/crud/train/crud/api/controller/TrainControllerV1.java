@@ -43,11 +43,10 @@ public class TrainControllerV1 {
   @Transactional
   public Response createTrain(final CreateTrainDto trainDto) {
     try {
-      Validator validator = validatorFactory.getValidator();
-      Set<ConstraintViolation<CreateTrainDto>> constraintViolations = validator.validate(trainDto);
+      Response errorResponse = responseUtil.validateRequest(trainDto);
 
-      if (!constraintViolations.isEmpty()) {
-        return responseUtil.formatBadrequest(constraintViolations);
+      if (errorResponse != null) {
+        return errorResponse;
       }
 
       var train = new Train();
@@ -65,8 +64,8 @@ public class TrainControllerV1 {
   }
 
   @GET
-  @Produces(MediaType.APPLICATION_JSON)
   @Path("/{id}")
+  @Produces(MediaType.APPLICATION_JSON)
   @Transactional
   public Response getTrain(@PathParam("id") Long trainId) {
     try {
