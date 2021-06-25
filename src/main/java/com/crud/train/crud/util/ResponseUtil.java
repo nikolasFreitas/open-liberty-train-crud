@@ -1,5 +1,6 @@
 package com.crud.train.crud.util;
 
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
@@ -13,9 +14,11 @@ import javax.ws.rs.core.Response.Status;
 import com.crud.train.crud.api.dto.ResponseDTO;
 import com.crud.train.crud.api.dto.UUIDResponseDTO;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 
-@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class ResponseUtil {
   @Inject
   private ResponseDTO responseDto;
@@ -23,9 +26,9 @@ public class ResponseUtil {
   @Inject
   private ValidatorFactory validatorFactory;
 
-  public <T> Response formatBadrequest(Set<ConstraintViolation<T>> constraintViolations) {
-    constraintViolations.stream().forEach((outroConstraint) -> {
-      responseDto.addError(outroConstraint.getMessageTemplate());
+  public <T> Response formatBadRequest(Set<ConstraintViolation<T>> constraintViolations) {
+    constraintViolations.stream().forEach((constraint) -> {
+      responseDto.addError(constraint.getMessageTemplate());
     });
     var response = Response.status(Status.BAD_REQUEST)
                     .entity(responseDto)
@@ -33,8 +36,19 @@ public class ResponseUtil {
     return response;
   }
 
-  public <T> Response formatCreate(T responseDTO) {
-    responseDto.setData(responseDTO);
+  public Response formatBadRequest(List<String> messageList) {
+    messageList.stream().forEach((message) -> {
+      responseDto.addError(message);
+    });
+
+    var response = Response.status(Status.BAD_REQUEST)
+                    .entity(responseDto)
+                    .build();
+    return response;
+  } 
+
+  public <T> Response formatCreate(T customResponseDTO) {
+    responseDto.setData(customResponseDTO);
     var response = Response.status(Status.CREATED)
       .entity(responseDto)
       .build();
@@ -51,12 +65,33 @@ public class ResponseUtil {
     return response;
   }
 
-  public <T> Response customFormat(Status httpStatus, T responseDTO) {
-    responseDto.setData(responseDTO);
+  public <T> Response customFormat(Status httpStatus, T customResponseDTO) {
+    responseDto.setData(customResponseDTO);
     var response = Response.status(httpStatus)
       .entity(responseDto)
       .build();
 
+    return response;
+  }
+
+  public Response notFoundFormat(List<String> messageList) {
+    messageList.stream().forEach(errorMessage -> {
+      responseDto.addError(errorMessage);
+    });
+    var response = Response.status(Status.NOT_FOUND)
+      .entity(responseDto)
+      .build(); 
+    
+    return response;
+  }
+
+  public Response notFoundFormat(String message) {
+    responseDto.addError(message);
+    
+    var response = Response.status(Status.NOT_FOUND)
+      .entity(responseDto)
+      .build(); 
+    
     return response;
   }
 
@@ -65,7 +100,7 @@ public class ResponseUtil {
     Set<ConstraintViolation<T>> constraintViolations = validator.validate(requestBody);
 
     if (!constraintViolations.isEmpty()) {
-      return this.formatBadrequest(constraintViolations);
+      return this.formatBadRequest(constraintViolations);
     }
 
     return null;
