@@ -25,7 +25,7 @@ public class Passanger {
   @Id
   @GeneratedValue(generator="Passanger_uuid")
   @JsonbTransient
-  private String id;
+  private String uuid;
 
   @Column(nullable = false)
   private String name;
