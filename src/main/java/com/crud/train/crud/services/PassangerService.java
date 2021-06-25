@@ -14,11 +14,19 @@ public class PassangerService {
   @Inject
   private PassangerDAO passangerDao;
   
-  public UUID create(Passanger passanger) {
-    return UUID.fromString(passangerDao.create(passanger).getId());
+  public UUID create(Passanger newPassanger) {
+    Boolean passangerAlreadyExists = passangerDao.find("email", newPassanger.getEmail()) != null;
+    if (passangerAlreadyExists) {
+      return null;
+    }
+    return UUID.fromString(passangerDao.create(newPassanger).getId());
   }
   
   public PassangerDAO getDao() {
     return passangerDao;
+  }
+
+  public Passanger getPassanger(UUID passangeUuid) {
+    return passangerDao.find(passangeUuid.toString());
   }
 }
