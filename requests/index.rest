@@ -1,5 +1,5 @@
 @baseurl = http://localhost:9081
-@passangerUUID = "1234"
+@passangerUUID = 080eb6b3-a006-4813-936d-7749f981fee2
 
 ##Create train
 POST {{baseurl}}/v1/train HTTP/1.1
@@ -17,7 +17,7 @@ GET {{baseurl}}/v1/train/1 HTTP/1.1
 
 ###
 
-###Create user
+###Create passanger
 POST {{baseurl}}/v1/passanger HTTP/1.1
 content-type: application/json
 
@@ -25,4 +25,9 @@ content-type: application/json
   "name": "Nikolas Kakaroto",
   "email": "nikolas.freitas@exemplo.com"
 }
+
+###
+
+###Get passanger
+GET {{baseurl}}/v1/passanger/{{passangerUUID}} HTTP/1.1
 
