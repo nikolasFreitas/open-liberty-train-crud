@@ -6,9 +6,6 @@ import javax.inject.Inject;
 import com.crud.train.crud.repository.Entity.Train;
 import com.crud.train.crud.repository.dao.TrainDAO;
 
-import lombok.Data;
-
-@Data
 @Stateless
 public class TrainService {
   @Inject

@@ -13,18 +13,21 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import org.eclipse.persistence.annotations.UuidGenerator;
+
 import lombok.Data;
 
 @Data
 @Entity
 @Table(name = "TRAVEL")
+@UuidGenerator(name = "travel_uuid")
 public class Travel implements Serializable {
   private static final long serialVersionUID = 1L;
 
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(generator = "travel_uuid")
   @JsonbTransient
-  private Long id;
+  private String uuid;
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Route route;
