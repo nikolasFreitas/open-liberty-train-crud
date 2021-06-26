@@ -1,6 +1,7 @@
 package com.crud.train.crud.api.controller;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -48,8 +49,7 @@ public class PassangerControllerV1 {
       return responseUtil.UUIDResponseFormat(passangerUuid);
     }
 
-    List<String> errorList = new ArrayList<>();
-    errorList.add("E-mail is not available");
+    List<String> errorList = Arrays.asList("E-mail is not available");
 
     return responseUtil.formatBadRequest(errorList);
   }
