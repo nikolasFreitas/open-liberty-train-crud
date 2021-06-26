@@ -34,10 +34,4 @@ public class Route implements Serializable {
 
   @Column(nullable = false)
   private String originCity;
-
-  @Column(nullable = false)
-  private LocalDateTime departureDateTime;
-
-  @Column(nullable = false)
-  private LocalDateTime arrivelDateTime;
 }

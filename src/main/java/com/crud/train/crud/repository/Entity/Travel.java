@@ -1,13 +1,14 @@
 package com.crud.train.crud.repository.Entity;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -37,4 +38,10 @@ public class Travel implements Serializable {
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Train train;
+
+  @Column(nullable = false)
+  private LocalDateTime departureDateTime;
+
+  @Column(nullable = false)
+  private LocalDateTime arrivelDateTime;
 }
