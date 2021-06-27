@@ -1,7 +1,6 @@
 package com.crud.train.crud.repository.Entity;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
@@ -12,6 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.Setter;

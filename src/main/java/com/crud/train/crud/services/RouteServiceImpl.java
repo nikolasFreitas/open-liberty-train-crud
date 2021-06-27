@@ -5,9 +5,10 @@ import javax.inject.Inject;
 
 import com.crud.train.crud.repository.Entity.Route;
 import com.crud.train.crud.repository.dao.RouteDAO;
+import com.crud.train.crud.services.interfaces.RouteService;
 
 @Stateless
-public class RouteService {
+public class RouteServiceImpl implements RouteService {
   @Inject
   private RouteDAO routeDao;
 

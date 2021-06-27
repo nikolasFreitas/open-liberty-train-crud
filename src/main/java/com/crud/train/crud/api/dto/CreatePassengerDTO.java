@@ -6,7 +6,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Data;
 
 @Data
-public class CreatePassangerDTO {
+public class  CreatePassengerDTO {
 
   @NotBlank(message = "Add a name to passanger")
   private String name;

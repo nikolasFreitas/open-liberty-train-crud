@@ -34,7 +34,7 @@ public class Travel implements Serializable {
   private Route route;
 
   @ManyToMany
-  private List<Passanger> passangers;
+  private List<Passenger> passengers;
 
   @ManyToOne(fetch = FetchType.LAZY)
   private Train train;

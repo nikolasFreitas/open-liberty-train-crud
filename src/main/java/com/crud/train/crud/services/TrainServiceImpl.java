@@ -5,9 +5,10 @@ import javax.inject.Inject;
 
 import com.crud.train.crud.repository.Entity.Train;
 import com.crud.train.crud.repository.dao.TrainDAO;
+import com.crud.train.crud.services.interfaces.TrainService;
 
 @Stateless
-public class TrainService {
+public class TrainServiceImpl implements TrainService {
   @Inject
   private TrainDAO trainDao;
 

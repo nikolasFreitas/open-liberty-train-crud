@@ -1,6 +1,7 @@
 package com.crud.train.crud.util;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
@@ -20,6 +21,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ResponseUtil {
+
   @Inject
   private ResponseDTO responseDto;
 
@@ -95,14 +97,14 @@ public class ResponseUtil {
     return response;
   }
 
-  public <T> Response validateRequest(T requestBody) {
+  public <T> Optional<Response> validateRequest(T requestBody) {
     Validator validator = validatorFactory.getValidator();
     Set<ConstraintViolation<T>> constraintViolations = validator.validate(requestBody);
 
     if (!constraintViolations.isEmpty()) {
-      return this.formatBadRequest(constraintViolations);
+      return Optional.of(this.formatBadRequest(constraintViolations));
     }
 
-    return null;
+    return Optional.empty();
   }
 }

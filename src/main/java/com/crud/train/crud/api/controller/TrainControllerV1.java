@@ -1,6 +1,9 @@
 package com.crud.train.crud.api.controller;
 
 
+import java.util.Optional;
+
+import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.validation.ValidationException;
 import javax.ws.rs.Consumes;
@@ -15,14 +18,15 @@ import javax.ws.rs.core.Response.Status;
 
 import com.crud.train.crud.api.dto.CreateTrainDto;
 import com.crud.train.crud.repository.Entity.Train;
-import com.crud.train.crud.services.TrainService;
+import com.crud.train.crud.services.TrainServiceImpl;
+import com.crud.train.crud.services.interfaces.TrainService;
 import com.crud.train.crud.util.ResponseUtil;
 
 
 @Path("/v1/train")
 public class TrainControllerV1 {
 
-  @Inject
+  @EJB
   private TrainService trainService;
 
   @Inject
@@ -33,10 +37,10 @@ public class TrainControllerV1 {
   @Produces(MediaType.APPLICATION_JSON)
   public Response createTrain(final CreateTrainDto trainDto) {
     try {
-      Response errorResponse = responseUtil.validateRequest(trainDto);
+      Optional<Response> errorResponse = responseUtil.validateRequest(trainDto);
 
-      if (errorResponse != null) {
-        return errorResponse;
+      if (errorResponse.isPresent()) {
+        return errorResponse.get();
       }
 
       var train = new Train();

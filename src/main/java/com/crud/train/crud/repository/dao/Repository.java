@@ -19,6 +19,8 @@ package com.crud.train.crud.repository.dao;
 import java.security.SecureRandom;
 import java.util.Base64;
 import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.Base64.Encoder;
 
 import javax.persistence.EntityManager;
@@ -85,13 +87,24 @@ public abstract class Repository<T> {
         return em.createQuery(criteria).getSingleResult();
     }
 
-    public T find(String column1, String value1, String column2, String value2) {
-        final CriteriaBuilder builder = em.getCriteriaBuilder();
-        final CriteriaQuery<T> criteria = builder.createQuery(this.genericClass);
-        Root<T> root = criteria.from(this.genericClass);
-        criteria.select(root).where((builder.equal(root.get(column1), value1)),
-                                   (builder.equal(root.get(column2), value2)));
-        return em.createQuery(criteria).getSingleResult();
+    public Optional<T> find(Map<String, String> items) {
+      final CriteriaBuilder builder = em.getCriteriaBuilder();
+      final CriteriaQuery<T> query = builder.createQuery(this.genericClass);
+      Root<T> from = query.from(this.genericClass);
+      var selectCriteria = query.select(from);
+
+      items.keySet().stream().forEach(column -> {
+        selectCriteria.where((builder
+          .equal(from.get(column), items.get(column))));
+      });
+
+      try {
+        return Optional.of(em.createQuery(query).getSingleResult());
+      } catch (Exception e) {
+        System.out.println(e.getMessage()); 
+      }
+
+      return Optional.empty();
     }
 
 

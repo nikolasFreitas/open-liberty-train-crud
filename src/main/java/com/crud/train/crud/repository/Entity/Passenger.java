@@ -17,13 +17,13 @@ import org.eclipse.persistence.annotations.UuidGenerator;
 import lombok.Data;
 
 @Entity
-@Table(name = "PASSANGERS")
+@Table(name = "PASSENGERS")
 @Data
-@UuidGenerator(name="Passanger_uuid")
-public class Passanger {
+@UuidGenerator(name="Passenger_uuid")
+public class Passenger {
 
   @Id
-  @GeneratedValue(generator="Passanger_uuid")
+  @GeneratedValue(generator="Passenger_uuid")
   @JsonbTransient
   private String uuid;
 
@@ -33,7 +33,7 @@ public class Passanger {
   @Column(unique = true, nullable = false)
   private String email;
 
-  @ManyToMany(mappedBy = "passangers", cascade = CascadeType.ALL)
+  @ManyToMany(mappedBy = "passengers", cascade = CascadeType.ALL)
   private List<Travel> travelList = new ArrayList<>();
 
 }
