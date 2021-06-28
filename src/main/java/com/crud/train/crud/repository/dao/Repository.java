@@ -27,6 +27,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 import javax.validation.Valid;
 
@@ -87,19 +88,20 @@ public abstract class Repository<T> {
         return em.createQuery(criteria).getSingleResult();
     }
 
-    public Optional<T> find(Map<String, String> items) {
+    public Optional<T> find(Map<String, String> filterMap) {
       final CriteriaBuilder builder = em.getCriteriaBuilder();
       final CriteriaQuery<T> query = builder.createQuery(this.genericClass);
       Root<T> from = query.from(this.genericClass);
-      var selectCriteria = query.select(from);
+      CriteriaQuery<T> selectCriteria = query.select(from);
 
-      items.keySet().stream().forEach(column -> {
-        selectCriteria.where((builder
-          .equal(from.get(column), items.get(column))));
-      });
+      Predicate filter = builder.and();
+      for (String key : filterMap.keySet()) {
+        filter = builder.and(filter, builder.equal(from.get(key), filterMap.get(key)));
+      }
 
       try {
-        return Optional.of(em.createQuery(query).getSingleResult());
+        selectCriteria.where(filter);
+        return Optional.of(em.createQuery(selectCriteria).getSingleResult());
       } catch (Exception e) {
         System.out.println(e.getMessage()); 
       }
