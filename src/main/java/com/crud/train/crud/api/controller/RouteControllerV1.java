@@ -13,7 +13,6 @@ import javax.ws.rs.core.Response;
 
 import com.crud.train.crud.api.dto.CreateRouteDTO;
 import com.crud.train.crud.repository.Entity.Route;
-import com.crud.train.crud.services.RouteServiceImpl;
 import com.crud.train.crud.services.interfaces.RouteService;
 import com.crud.train.crud.util.ResponseUtil;
 

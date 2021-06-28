@@ -2,7 +2,6 @@ package com.crud.train.crud.api.controller;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
-import javax.validation.ValidatorFactory;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -20,8 +19,6 @@ public class TravelControllerV1 {
   @Inject
   private ResponseUtil responseUtil;
 
-  @Inject
-  private ValidatorFactory validatorFactory;
 
   @EJB
   private TrainService trainService;
