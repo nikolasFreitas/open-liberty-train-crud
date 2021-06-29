@@ -60,12 +60,11 @@ public class TrainControllerV1 {
   @Path("/{id}")
   @Produces(MediaType.APPLICATION_JSON)
   public Response getTrain(@PathParam("id") Long trainId) {
-    try {
-      var train = trainService.getDao().find(trainId);
-      return responseUtil.customFormat(Status.OK, train);
-    } catch (Exception e) {
-      System.out.println(e);
-      return Response.status(Status.NOT_FOUND).build();
+    var train = trainService.getDao().find(trainId);
+    if (train.isPresent()) {
+      return responseUtil.customFormat(Status.OK, train.get());
     }
+
+    return Response.status(Status.NOT_FOUND).build();
   }
 }

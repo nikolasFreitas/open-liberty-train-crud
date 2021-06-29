@@ -67,8 +67,12 @@ public class ResponseUtil {
     return response;
   }
 
-  public <T> Response customFormat(Status httpStatus, T customResponseDTO) {
-    responseDto.setData(customResponseDTO);
+  public <T> Response customFormat(Status httpStatus, T customResponseBody) {
+    if (httpStatus.getStatusCode() < 300) {
+      responseDto.setData(customResponseBody);
+    } else {
+      responseDto.addError(customResponseBody.toString());
+    }
     var response = Response.status(httpStatus)
       .entity(responseDto)
       .build();

@@ -18,11 +18,8 @@ public class RouteServiceImpl implements RouteService {
 
   @Override
   public Route create(Route route) {
-    Map<String, String> filterItems = new HashMap<>();
-    filterItems.put("destinyCity", route.getDestinyCity());
-    filterItems.put("originCity", route.getOriginCity());
+    Optional<Route> routeOption = findRouteByOriginAndDestiny(route.getOriginCity(), route.getDestinyCity());
 
-    Optional<Route> routeOption = routeDao.find(filterItems);
     if (routeOption.isPresent()) {
       var repeatedRoute = routeOption.get();
       StringBuffer repeatedRouteLog = new StringBuffer("Route with")
@@ -40,5 +37,15 @@ public class RouteServiceImpl implements RouteService {
   @Override
   public RouteDAO getDao() {
     return routeDao;
+  }
+
+  @Override
+  public Optional<Route> findRouteByOriginAndDestiny(String originCity, String destinyCity) {
+    Map<String, String> filterItems = new HashMap<>();
+    filterItems.put("originCity", originCity);
+    filterItems.put("destinyCity", destinyCity);
+
+    Optional<Route> routeOption = routeDao.find(filterItems);
+    return routeOption;
   }
 }

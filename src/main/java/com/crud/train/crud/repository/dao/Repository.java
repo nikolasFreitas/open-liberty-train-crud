@@ -18,10 +18,10 @@ package com.crud.train.crud.repository.dao;
  */
 import java.security.SecureRandom;
 import java.util.Base64;
+import java.util.Base64.Encoder;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Base64.Encoder;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,7 +29,6 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
-import javax.validation.Valid;
 
 public abstract class Repository<T> {
 
@@ -42,7 +41,7 @@ public abstract class Repository<T> {
         this.genericClass = genericClass;
     }
 
-    public T create(@Valid final T obj) {
+    public T create(final T obj) {
         this.em.persist(obj);
         return obj;
     }
@@ -68,8 +67,8 @@ public abstract class Repository<T> {
         this.em.remove(obj);
     }
 
-    public T find(Long id) {
-        return em.find(this.genericClass, id);
+    public Optional<T> find(Long id) {
+        return Optional.ofNullable(em.find(this.genericClass, id));
     }
 
     public T find(String hash) {

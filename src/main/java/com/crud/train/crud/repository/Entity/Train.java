@@ -42,7 +42,10 @@ public class Train implements Serializable {
   @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
   private List<Travel> travelList = new ArrayList<>();
 
-  private Travel actualTravel;
+  public void addTravel(Travel travel) {
+    travel.setTrain(this);
+    travelList.add(travel);
+  }
 }
 
 

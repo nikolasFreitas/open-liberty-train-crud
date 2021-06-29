@@ -1,11 +1,12 @@
 package com.crud.train.crud.api.dto;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+import javax.json.bind.annotation.JsonbDateFormat;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-
-import com.crud.train.crud.repository.Entity.Route;
 
 import lombok.Data;
 
@@ -15,12 +16,17 @@ public class CreateTravelDTO {
   @Min(1)
   private Long trainId;
 
-  @NotNull
-  private Route route;
+  @NotBlank
+  private String destinyCity;
+
+  @NotBlank
+  private String originCity;
 
   @NotNull
-  private LocalDate departure;
+  @JsonbDateFormat("HH:mm:ss dd-MM-yyyy")
+  private LocalDateTime departureDateTime;
 
   @NotNull
-  private LocalDate arrivalDate;
+  @JsonbDateFormat("HH:mm:ss dd-MM-yyyy")
+  private LocalDateTime arrivalDateTime;
 }

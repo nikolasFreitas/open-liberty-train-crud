@@ -17,13 +17,22 @@ import javax.persistence.Table;
 import org.eclipse.persistence.annotations.UuidGenerator;
 
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Entity
 @Table(name = "TRAVEL")
 @UuidGenerator(name = "travel_uuid")
+@NoArgsConstructor
 public class Travel implements Serializable {
   private static final long serialVersionUID = 1L;
+
+  public Travel(Route route, Train train, LocalDateTime departureDateTime, LocalDateTime arrivelDateTime) {
+    this.route = route;
+    this.train = train;
+    this.departureDateTime = departureDateTime;
+    this.arrivelDateTime = arrivelDateTime;
+  }
 
   @Id
   @GeneratedValue(generator = "travel_uuid")
