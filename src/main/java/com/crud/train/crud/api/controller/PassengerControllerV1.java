@@ -1,9 +1,6 @@
 package com.crud.train.crud.api.controller;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 
 import javax.ejb.EJB;
 import javax.inject.Inject;
@@ -46,12 +43,12 @@ public class PassengerControllerV1 {
     
     passenger.setName(passengerDTO.getName());
     passenger.setEmail(passengerDTO.getEmail());
-    var passangerUuid = passengerService.create(passenger);
-    if (passangerUuid.isPresent()) {
-      return responseUtil.UUIDResponseFormat(passangerUuid.get());
+    var passengerUuid = passengerService.create(passenger);
+    if (passengerUuid.isPresent()) {
+      return responseUtil.UUIDResponseFormat(passengerUuid.get());
     }
 
-    List<String> errorList = Arrays.asList("E-mail is not available");
+    List<String> errorList = Collections.singletonList("E-mail is not available");
 
     return responseUtil.formatBadRequest(errorList);
   }
