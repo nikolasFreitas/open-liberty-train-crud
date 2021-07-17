@@ -1,6 +1,5 @@
 package com.crud.train.crud.api.dto;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 import javax.json.bind.annotation.JsonbDateFormat;
@@ -16,10 +15,10 @@ public class CreateTravelDTO {
   @Min(1)
   private Long trainId;
 
-  @NotBlank
+  @NotBlank(message = "Destiny city must not be empty")
   private String destinyCity;
 
-  @NotBlank
+  @NotBlank(message = "Origin city must not be empty")
   private String originCity;
 
   @NotNull

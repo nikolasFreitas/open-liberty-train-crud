@@ -102,7 +102,7 @@ public abstract class Repository<T> {
         selectCriteria.where(filter);
         return Optional.of(em.createQuery(selectCriteria).getSingleResult());
       } catch (Exception e) {
-        System.out.println(e.getMessage()); 
+        System.out.println(e.getStackTrace()); 
       }
 
       return Optional.empty();

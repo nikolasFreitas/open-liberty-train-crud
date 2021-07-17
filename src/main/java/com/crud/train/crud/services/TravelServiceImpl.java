@@ -44,12 +44,16 @@ public class TravelServiceImpl implements TravelService {
     }
 
     Travel travel = new Travel(route.get(), train.get(), createTravelDTO.getDepartureDateTime(), createTravelDTO.getArrivalDateTime());
-    return Optional.ofNullable(UUID.fromString(travelDAO.create(travel).getUuid()));
+    var travelOpt = Optional.of(travelDAO.create(travel));
+    if (travelOpt.isEmpty()) {
+      return Optional.empty();
+    }
+    return Optional.of(UUID.fromString(travelOpt.get().getUuid()));
   }
 
   @Override
   public Optional<Travel> getTravel(UUID travel) {
-    // TODO Auto-generated method stub
-    return null;
+    var entity = travelDAO.find(travel.toString());
+    return Optional.ofNullable(entity);
   }
 }

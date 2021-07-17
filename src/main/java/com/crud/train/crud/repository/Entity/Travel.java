@@ -1,13 +1,11 @@
 package com.crud.train.crud.repository.Entity;
 
-import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -19,14 +17,12 @@ import org.eclipse.persistence.annotations.UuidGenerator;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Entity
 @Table(name = "TRAVEL")
 @UuidGenerator(name = "travel_uuid")
+@Data
 @NoArgsConstructor
-public class Travel implements Serializable {
-  private static final long serialVersionUID = 1L;
-
+public class Travel {
   public Travel(Route route, Train train, LocalDateTime departureDateTime, LocalDateTime arrivelDateTime) {
     this.route = route;
     this.train = train;
@@ -36,16 +32,15 @@ public class Travel implements Serializable {
 
   @Id
   @GeneratedValue(generator = "travel_uuid")
-  @JsonbTransient
   private String uuid;
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   private Route route;
 
-  @ManyToMany
-  private List<Passenger> passengers;
+  @ManyToMany(mappedBy = "travelList")
+  private List<Passenger> passengers = new ArrayList<>();
 
-  @ManyToOne(fetch = FetchType.LAZY)
+  @ManyToOne
   private Train train;
 
   @Column(nullable = false)
@@ -53,4 +48,9 @@ public class Travel implements Serializable {
 
   @Column(nullable = false)
   private LocalDateTime arrivelDateTime;
+
+  public void addTravel(Passenger passenger) {
+    passenger.getTravelList().add(this);
+    passengers.add(passenger);
+  }
 }

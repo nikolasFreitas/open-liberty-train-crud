@@ -1,11 +1,9 @@
 package com.crud.train.crud.repository.Entity;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,15 +16,15 @@ import org.eclipse.persistence.annotations.UuidGenerator;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
 @Entity
 @Table(name = "TRAIN")
 @UuidGenerator(name="Passanger_uuid")
-public class Train implements Serializable {
-  private static final long serialVersionUID = 1L;
-
+@NoArgsConstructor
+public class Train {
   @Id
   @GeneratedValue(strategy = GenerationType.SEQUENCE)
   @JsonbTransient
@@ -39,7 +37,8 @@ public class Train implements Serializable {
   @Column(name = "WAGONS_QUANTITY", nullable = false)
   private Integer qtdWagons;
 
-  @OneToMany(mappedBy = "train", cascade = CascadeType.ALL)
+  @OneToMany(mappedBy = "train")
+  @JsonbTransient
   private List<Travel> travelList = new ArrayList<>();
 
   public void addTravel(Travel travel) {

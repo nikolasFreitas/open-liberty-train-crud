@@ -35,8 +35,8 @@ public class TrainServiceImpl implements TrainService {
         return trainOptional;
       }
 
-      Travel lastTravel = train.getTravelList().get(train.getTravelList().size() - 1);
-      if (lastTravel.getArrivelDateTime().isAfter(departurDateTime)) {
+      Travel lastTravel = train.getTravelList().get(0);
+      if (lastTravel.getArrivelDateTime().isBefore(departurDateTime)) {
         return trainOptional;
       }
 
@@ -48,13 +48,14 @@ public class TrainServiceImpl implements TrainService {
 
   @Override
   public Optional<Train> addTrainToTravel(Long id, Travel travel) {
-    Optional<Train> trainOptional = trainDao.find(id);
-    if (trainOptional.isPresent()) {
-      trainOptional.get().addTravel(travel);
-      return trainOptional;
-    }
+    throw new UnsupportedOperationException("This methods is not implmented yet");
+    // Optional<Train> trainOptional = trainDao.find(id);
+    // if (trainOptional.isPresent()) {
+    //   trainOptional.get().addTravel(travel);
+    //   return trainOptional;
+    // }
     
     
-    return Optional.empty();
+    // return Optional.empty();
   }
 }
