@@ -5,7 +5,6 @@ services:
     container_name: mysql8
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: myDB
       MYSQL_USER: exampleUser
       MYSQL_PASSWORD: examplePassword
