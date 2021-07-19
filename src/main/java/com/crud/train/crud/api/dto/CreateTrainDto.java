@@ -13,6 +13,7 @@ import lombok.ToString;
 @ToString
 public class CreateTrainDto {
   @NotEmpty(message = "Model must no be empty")
+  @NotNull
   private String locomotiveModel;
 
   @NotNull(message = "Quantity of wagons must no be NULL")

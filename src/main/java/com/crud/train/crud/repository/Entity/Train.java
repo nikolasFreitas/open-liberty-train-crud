@@ -38,7 +38,6 @@ public class Train {
   private Integer qtdWagons;
 
   @OneToMany(mappedBy = "train")
-  @JsonbTransient
   private List<Travel> travelList = new ArrayList<>();
 
   public void addTravel(Travel travel) {

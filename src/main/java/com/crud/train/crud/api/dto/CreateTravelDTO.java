@@ -11,14 +11,15 @@ import lombok.Data;
 
 @Data
 public class CreateTravelDTO {
-  @NotNull
   @Min(1)
   private Long trainId;
 
   @NotBlank(message = "Destiny city must not be empty")
+  @NotNull
   private String destinyCity;
 
   @NotBlank(message = "Origin city must not be empty")
+  @NotNull
   private String originCity;
 
   @NotNull

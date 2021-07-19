@@ -3,7 +3,9 @@ package com.crud.train.crud.api.controller;
 import java.util.*;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,6 +22,7 @@ import com.crud.train.crud.services.interfaces.PassengerService;
 import com.crud.train.crud.util.ResponseUtil;
 
 @Path("/v1/passenger")
+@RequestScoped
 public class PassengerControllerV1 {
   
   @Inject
@@ -32,13 +35,7 @@ public class PassengerControllerV1 {
   @POST
   @Consumes(MediaType.APPLICATION_JSON)
   @Produces(MediaType.APPLICATION_JSON)
-  public Response create(CreatePassengerDTO passengerDTO) {
-    Optional<Response> errorResponse = responseUtil.validateRequest(passengerDTO);
-
-    if (errorResponse.isPresent()) {
-      return errorResponse.get();
-    }
-
+  public Response create(@Valid CreatePassengerDTO passengerDTO) {
     Passenger passenger = new Passenger();
     
     passenger.setName(passengerDTO.getName());
@@ -58,9 +55,9 @@ public class PassengerControllerV1 {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getPassenger(@PathParam("uuid") String passengerUuid) {
     try {
-      Passenger passanger = passengerService.getPassanger(UUID.fromString(passengerUuid));
-      if (passanger != null) {
-        return responseUtil.customFormat(Status.OK, passanger);
+      Passenger passenger = passengerService.getPassanger(UUID.fromString(passengerUuid));
+      if (passenger != null) {
+        return responseUtil.customFormat(Status.OK, passenger);
       }
     } catch (IllegalArgumentException e) {
       List<String> messageList = Arrays.asList(e.getMessage());
@@ -78,9 +75,9 @@ public class PassengerControllerV1 {
   @Produces(MediaType.APPLICATION_JSON)
   public Response getPassengerByEmail(@PathParam("email") String email) {
 
-    var passanger = passengerService.getPassangerByEmail(email);
-    if (passanger.isPresent()) {
-      return responseUtil.customFormat(Status.OK, passanger);
+    var passenger = passengerService.getPassangerByEmail(email);
+    if (passenger.isPresent()) {
+      return responseUtil.customFormat(Status.OK, passenger);
     }
 
     String notFoundMessage = "User with email: " + email + " not found";

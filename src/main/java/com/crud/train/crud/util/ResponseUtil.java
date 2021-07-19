@@ -32,10 +32,9 @@ public class ResponseUtil {
     constraintViolations.stream().forEach((constraint) -> {
       responseDto.addError(constraint.getMessageTemplate());
     });
-    var response = Response.status(Status.BAD_REQUEST)
+    return Response.status(Status.BAD_REQUEST)
                     .entity(responseDto)
                     .build();
-    return response;
   }
 
   public Response formatBadRequest(List<String> messageList) {
